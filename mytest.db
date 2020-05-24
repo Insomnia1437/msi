@@ -1,0 +1,13 @@
+## comment
+#
+# Created by sdcswd@gmail.com
+# on 2020-05-24
+#
+##
+
+record(ai, "$(USER):$(HOST)") {
+    field(DESC, "description")
+    field(DTYP, "Soft Channel stream")
+    field(SCAN, "1 second")
+    field(INP,  "$(HOST)")
+}

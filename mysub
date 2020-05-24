@@ -1,0 +1,8 @@
+# Created by sdcswd@gmail.com
+# on 2020-05-24
+
+file "mytest.db" {
+## some normal comments
+    ## this kind of comment is not allowed by original msi-1.7
+    {USER = "sdcswd", HOST = "atari"}
+}

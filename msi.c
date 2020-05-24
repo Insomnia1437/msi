@@ -681,13 +681,32 @@ static char *substituteGetReplacements(void *pvt)
     }
 }
 
+static char *ltrim(char *str, const char *seps)
+{
+    size_t totrim;
+    if (seps == NULL) {
+        seps = "\t\n\v\f\r ";
+    }
+    totrim = strspn(str, seps);
+    if (totrim > 0) {
+        size_t len = strlen(str);
+        if (totrim == len) {
+            str[0] = '\0';
+        }
+        else {
+            memmove(str, str + totrim, len + 1 - totrim);
+        }
+    }
+    return str;
+}
+
 static char *subGetNextLine(subFile *psubFile)
 {
     char *pline;
 
     pline = fgets(psubFile->inputBuffer,MAX_BUFFER_SIZE,psubFile->fp);
     ++psubFile->lineNum;
-    while(pline && psubFile->inputBuffer[0]=='#') {
+    while(pline && ltrim(psubFile->inputBuffer, NULL) && psubFile->inputBuffer[0]=='#') {
 	pline = fgets(psubFile->inputBuffer,MAX_BUFFER_SIZE,psubFile->fp);
         ++psubFile->lineNum;
     }
